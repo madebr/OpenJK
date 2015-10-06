@@ -58,6 +58,10 @@ void G_InitMemory( void ) {
 	g_debugalloc = gi.cvar ("g_debugalloc", "0", 0);
 }
 
+bool G_FromZone( void *ptr ) {
+    return gi.bIsFromZone(ptr, TAG_G_ALLOC);
+}
+
 void Svcmd_GameMem_f( void ) {
 	gi.Printf( "Game memory status: %i allocated\n", allocPoint );
 }

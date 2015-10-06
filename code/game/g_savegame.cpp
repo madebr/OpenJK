@@ -197,7 +197,7 @@ static char *GetStringPtr(int iStrlen, char *psOriginal/*may be NULL*/)
 			iStrlen);
 
 		// TAG_G_ALLOC is always blown away, we can never recycle
-		if (psOriginal && gi.bIsFromZone(psOriginal, TAG_G_ALLOC)) {
+		if (psOriginal && G_FromZone(psOriginal)) {
 			if (!strcmp(psOriginal,sString))
 			{//it's a legal ptr and they're the same so let's just reuse it instead of free/alloc
 				return psOriginal;

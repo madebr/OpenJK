@@ -632,6 +632,7 @@ void *_D_G_Alloc( size_t size, qboolean clear, const char *file, int line );
 void *G_Alloc( size_t size, qboolean clear );
 #endif
 void G_InitMemory( void );
+bool G_FromZone( void *ptr );
 void Svcmd_GameMem_f( void );
 
 //
