@@ -1956,11 +1956,11 @@ qboolean G_SetSaber(gentity_t *ent, int saberNum, char *saberName, qboolean sieg
 void G_ValidateSiegeClassForTeam(gentity_t *ent, int team);
 
 typedef struct userinfoValidate_s {
-	const char		*field, *fieldClean;
+	const char		*fieldClean;
 	unsigned int	minCount, maxCount;
 } userinfoValidate_t;
 
-#define UIF( x, _min, _max ) { STRING(\\) #x STRING(\\), STRING( x ), _min, _max }
+#define UIF( x, _min, _max ) { STRING( x ), _min, _max }
 static userinfoValidate_t userinfoFields[] = {
 	UIF( cl_guid,			0, 0 ), // not allowed, q3fill protection
 	UIF( cl_punkbuster,		0, 0 ), // not allowed, q3fill protection
