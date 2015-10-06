@@ -27,7 +27,6 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "b_local.h"
 #include "anims.h"
 #include "g_functions.h"
-#include "say.h"
 #include "Q3_Interface.h"
 #include "g_vehicles.h"
 

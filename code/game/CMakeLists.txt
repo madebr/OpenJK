@@ -174,7 +174,6 @@ set(SPGameGameFiles
 	"${SPDir}/game/hitlocs.h"
 	"${SPDir}/game/npc_headers.h"
 	"${SPDir}/game/objectives.h"
-	"${SPDir}/game/say.h"
 	"${SPDir}/game/statindex.h"
 	"${SPDir}/game/surfaceflags.h"
 	"${SPDir}/game/teams.h"
