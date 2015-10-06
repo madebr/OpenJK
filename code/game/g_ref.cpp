@@ -186,7 +186,11 @@ TAG_Add
 reference_tag_t	*TAG_Add( const char *name, const char *owner, vec3_t origin, vec3_t angles, int radius, int flags )
 {
 	reference_tag_t	*tag = new reference_tag_t;
-	VALIDATEP( tag );
+	if ( tag == NULL )
+	{
+		assert(0);
+		return NULL;
+	}
 
 	//Copy the information
 	VectorCopy( origin, tag->origin );
@@ -236,7 +240,11 @@ reference_tag_t	*TAG_Add( const char *name, const char *owner, vec3_t origin, ve
 		//Create a new owner list
 		tagOwner_t	*tagOwner = new	tagOwner_t;
 
-		VALIDATEP( tagOwner );
+		if ( tagOwner == NULL )
+		{
+			assert(0);
+			return NULL;
+		}
 
 		//Insert the information
 		tagOwner->tags.insert( tagOwner->tags.end(), tag );
@@ -259,13 +267,11 @@ int	TAG_GetOrigin( const char *owner, const char *name, vec3_t origin )
 {
 	reference_tag_t	*tag = TAG_Find( owner, name );
 
-	if (!tag)
+	if ( tag == NULL )
 	{
 		VectorClear(origin);
 		return false;
 	}
-
-	VALIDATEB( tag );
 
 	VectorCopy( tag->origin, origin );
 
@@ -283,7 +289,7 @@ int	TAG_GetOrigin2( const char *owner, const char *name, vec3_t origin )
 {
 	reference_tag_t	*tag = TAG_Find( owner, name );
 
-	if( tag == NULL )
+	if ( tag == NULL )
 	{
 		return qfalse;
 	}
@@ -302,7 +308,11 @@ int	TAG_GetAngles( const char *owner, const char *name, vec3_t angles )
 {
 	reference_tag_t	*tag = TAG_Find( owner, name );
 
-	VALIDATEB( tag );
+	if ( tag == NULL )
+	{
+		assert(0);
+		return qfalse;
+	}
 
 	VectorCopy( tag->angles, angles );
 
@@ -319,7 +329,11 @@ int TAG_GetRadius( const char *owner, const char *name )
 {
 	reference_tag_t	*tag = TAG_Find( owner, name );
 
-	VALIDATEB( tag );
+	if (tag == NULL)
+	{
+		assert(0);
+		return qfalse;
+	}
 
 	return tag->radius;
 }
@@ -334,7 +348,11 @@ int TAG_GetFlags( const char *owner, const char *name )
 {
 	reference_tag_t	*tag = TAG_Find( owner, name );
 
-	VALIDATEB( tag );
+	if (tag == NULL)
+	{
+		assert(0);
+		return qfalse;
+	}
 
 	return tag->flags;
 }

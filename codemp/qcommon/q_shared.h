@@ -63,10 +63,6 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #define VALID( a )		( a != NULL )
 #define	VALIDATE( a )	( assert( a ) )
 
-#define	VALIDATEV( a )	if ( a == NULL ) {	assert(0);	return;			}
-#define	VALIDATEB( a )	if ( a == NULL ) {	assert(0);	return qfalse;	}
-#define VALIDATEP( a )	if ( a == NULL ) {	assert(0);	return NULL;	}
-
 #define VALIDSTRING( a )	( ( a != NULL ) && ( a[0] != '\0' ) )
 #define VALIDENT( e )		( ( e != NULL ) && ( (e)->inuse ) )
 

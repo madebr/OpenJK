@@ -8201,7 +8201,11 @@ int		CQuake3GameInterface::GetTag( int entID, const char *name, int lookup, vec3
 {
 	gentity_t	*ent = &g_entities[ entID ];
 
-	VALIDATEB( ent );
+	if (ent == NULL)
+	{
+		assert(0);
+		return qfalse;
+	}
 
 	switch ( lookup )
 	{
