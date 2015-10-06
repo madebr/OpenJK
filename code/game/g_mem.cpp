@@ -35,15 +35,22 @@ static char		memoryPool[POOLSIZE];
 static int		allocPoint;
 static cvar_t	*g_debugalloc;
 
-void *G_Alloc( int size ) {
+#ifdef DEBUG_ZONE_ALLOCS
+void *_D_G_Alloc( size_t size, qboolean clear, const char *filename, int line ) {
+#else
+void *G_Alloc( size_t size, qboolean clear ) {
+#endif
 	if ( g_debugalloc->integer ) {
 		gi.Printf( "G_Alloc of %i bytes\n", size );
 	}
 
-
 	allocPoint += size;
 
-	return gi.Malloc(size, TAG_G_ALLOC, qfalse);
+#ifdef DEBUG_ZONE_ALLOCS
+	return gi._D_Z_Malloc(size, TAG_G_ALLOC, clear, 4, filename, line);
+#else
+	return gi.Malloc(size, TAG_G_ALLOC, clear);
+#endif
 }
 
 void G_InitMemory( void ) {

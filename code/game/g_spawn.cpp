@@ -909,7 +909,13 @@ Builds a copy of the string, translating \n to real linefeeds
 so message texts can be multi-line
 =============
 */
-char *G_NewString( const char *string ) {
+#ifdef DEBUG_ZONE_ALLOCS
+char *_D_G_NewString( const char *string, const char *file, int line )
+#else
+char *G_NewString( const char *string )
+#endif
+{
+
 	char	*newb, *new_p;
 	int		i,l;
 
@@ -921,7 +927,11 @@ char *G_NewString( const char *string ) {
 
 	l = strlen(string) + 1;
 
-	newb = (char *) G_Alloc( l );
+#ifdef DEBUG_ZONE_ALLOCS
+	newb = (char *) _D_G_Alloc( l, qfalse, file, line );
+#else
+	newb = (char *) G_Alloc( l, qfalse );
+#endif
 
 	new_p = newb;
 

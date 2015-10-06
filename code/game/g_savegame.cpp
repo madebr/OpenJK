@@ -1065,7 +1065,7 @@ static void ReadGEntities(qboolean qbAutosave)
 				// original didn't have one (hmmm...), so make a new one...
 				//
 				//assert(0);	// I want to know about this, though not in release
-				pEnt->NPC = (gNPC_t *) G_Alloc(sizeof(*pEnt->NPC));
+				pEnt->NPC = (gNPC_t *) G_Alloc(sizeof(*pEnt->NPC), qfalse);
 			}
 
 			// copy over the one we've just loaded...
@@ -1100,7 +1100,7 @@ static void ReadGEntities(qboolean qbAutosave)
 			{
 				// original didn't have one (hmmm...) so make a new one...
 				//
-				pEnt->client = (gclient_t *) G_Alloc(sizeof(*pEnt->client));
+				pEnt->client = (gclient_t *) G_Alloc(sizeof(*pEnt->client), qfalse);
 			}
 
 			// copy over the one we've just loaded....
@@ -1135,7 +1135,7 @@ static void ReadGEntities(qboolean qbAutosave)
 			{
 				// original didn't have one, so make a new one...
 				//
-				pEnt->parms = (parms_t *) G_Alloc(sizeof(*pEnt->parms));
+				pEnt->parms = (parms_t *) G_Alloc(sizeof(*pEnt->parms), qfalse);
 			}
 
 			// copy over the one we've just loaded...

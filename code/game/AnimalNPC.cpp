@@ -1059,7 +1059,7 @@ void G_CreateAnimalNPC( Vehicle_t **pVeh, const char *strAnimalType )
 	memset(*pVeh, 0, sizeof(Vehicle_t));
 	(*pVeh)->m_pVehicleInfo = &g_vehicleInfo[BG_VehicleGetIndex( strAnimalType )];
 #else
-	(*pVeh) = (Vehicle_t *) gi.Malloc( sizeof(Vehicle_t), TAG_G_ALLOC, qtrue );
+	(*pVeh) = (Vehicle_t *) G_Alloc( sizeof(Vehicle_t), qtrue );
 	(*pVeh)->m_pVehicleInfo = &g_vehicleInfo[BG_VehicleGetIndex( strAnimalType )];
 #endif
 }

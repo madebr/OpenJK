@@ -1503,7 +1503,7 @@ gentity_t *NPC_Spawn_Do( gentity_t *ent, qboolean fullSpawnNow )
 		return NULL;
 	}
 
-	newent->client = (gclient_t *)gi.Malloc(sizeof(gclient_t), TAG_G_ALLOC, qtrue);
+	newent->client = (gclient_t *)G_Alloc( sizeof(gclient_t), qtrue);
 
 	newent->svFlags |= SVF_NPC;
 
@@ -1517,7 +1517,7 @@ gentity_t *NPC_Spawn_Do( gentity_t *ent, qboolean fullSpawnNow )
 		newent->NPC_type = Q_strlwr( G_NewString( ent->NPC_type ) );	//get my own copy so i can free it when i die
 	}
 
-	newent->NPC = (gNPC_t*) gi.Malloc(sizeof(gNPC_t), TAG_G_ALLOC, qtrue);
+	newent->NPC = (gNPC_t*) G_Alloc(sizeof(gNPC_t), qtrue);
 
 	newent->NPC->tempGoal = G_Spawn();
 

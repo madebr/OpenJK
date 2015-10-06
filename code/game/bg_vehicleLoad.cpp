@@ -1465,7 +1465,7 @@ void BG_VehWeaponLoadParms( void )
 #ifdef _JK2MP
 	tempReadBuffer = (char *)BG_TempAlloc(MAX_VEH_WEAPON_DATA_SIZE);
 #else
-	tempReadBuffer = (char *)gi.Malloc( MAX_VEH_WEAPON_DATA_SIZE, TAG_G_ALLOC, qtrue );
+	tempReadBuffer = (char *)G_Alloc( MAX_VEH_WEAPON_DATA_SIZE, qtrue );
 #endif
 
 	// NOTE: Not use TempAlloc anymore...

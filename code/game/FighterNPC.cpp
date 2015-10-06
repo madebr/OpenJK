@@ -1744,7 +1744,7 @@ void G_CreateFighterNPC( Vehicle_t **pVeh, const char *strType )
 #endif
 	memset(*pVeh, 0, sizeof(Vehicle_t));
 #else
-	(*pVeh) = (Vehicle_t *) gi.Malloc( sizeof(Vehicle_t), TAG_G_ALLOC, qtrue );
+	(*pVeh) = (Vehicle_t *) G_Alloc( sizeof(Vehicle_t), qtrue );
 #endif
 	(*pVeh)->m_pVehicleInfo = &g_vehicleInfo[BG_VehicleGetIndex( strType )];
 }

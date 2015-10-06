@@ -4077,7 +4077,7 @@ void Q3_SetParm (int entID, int parmNum, const char *parmValue)
 
 	if( !ent->parms )
 	{
-		ent->parms = (parms_t *)G_Alloc( sizeof(parms_t) );
+		ent->parms = (parms_t *)G_Alloc( sizeof(parms_t), qfalse );
 		memset( ent->parms, 0, sizeof(parms_t) );
 	}
 

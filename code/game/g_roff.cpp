@@ -306,7 +306,7 @@ static qboolean G_InitRoff( char *file, unsigned char *data )
 		// We are Old School(tm)
 		roffs[num_roffs].type = 1;
 
-		roffs[num_roffs].data = (void *) G_Alloc( count * sizeof( move_rotate_t ) );
+		roffs[num_roffs].data = (void *) G_Alloc( count * sizeof( move_rotate_t ), qfalse );
 		move_rotate_t *mem	= (move_rotate_t *)roffs[num_roffs].data;
 
 		roffs[num_roffs].mFrameTime = 100; // old school ones have a hard-coded frame time
@@ -348,7 +348,7 @@ static qboolean G_InitRoff( char *file, unsigned char *data )
 		count = LittleLong(hdr->mCount);
 
 		roffs[num_roffs].frames	= count;
-		roffs[num_roffs].data	= (void *) G_Alloc( count * sizeof( move_rotate2_t ));
+		roffs[num_roffs].data	= (void *) G_Alloc( count * sizeof( move_rotate2_t ), qfalse );		
 		move_rotate2_t *mem		= (move_rotate2_t *)roffs[num_roffs].data;
 
 		if ( mem )

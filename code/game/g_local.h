@@ -625,7 +625,12 @@ qboolean OnSameTeam( gentity_t *ent1, gentity_t *ent2 );
 //
 // g_mem.c
 //
-void *G_Alloc( int size );
+#ifdef DEBUG_ZONE_ALLOCS
+void *_D_G_Alloc( size_t size, qboolean clear, const char *file, int line );
+#define G_Alloc(size, clear) _D_G_Alloc((size), (clear), __FILE__, __LINE__)
+#else
+void *G_Alloc( size_t size, qboolean clear );
+#endif
 void G_InitMemory( void );
 void Svcmd_GameMem_f( void );
 
@@ -686,7 +691,12 @@ void TAG_ShowTags( int flags );
 
 // Reference tags END
 
+#ifdef DEBUG_ZONE_ALLOCS
+extern char *_D_G_NewString( const char *string, const char *file, int line );
+#define G_NewString(string) _D_G_NewString((string), __FILE__, __LINE__)
+#else
 extern char *G_NewString( const char *string );
+#endif
 
 // some stuff for savegames...
 //
