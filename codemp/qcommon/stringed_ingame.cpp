@@ -1088,14 +1088,7 @@ int SE_GetNumLanguages(void)
 	if ( gvLanguagesAvailable.empty() )
 	{
 		std::string strResults;
-		/*int iFilesFound = */SE_BuildFileList(
-												#ifdef _STRINGED
-													va("C:\\Source\\Tools\\StringEd\\test_data\\%s",sSE_STRINGS_DIR)
-												#else
-													sSE_STRINGS_DIR
-												#endif
-												, strResults
-											);
+		/*int iFilesFound = */SE_BuildFileList( sSE_STRINGS_DIR, strResults );
 
 		std::set<std::string> strUniqueStrings;	// laziness <g>
 		const char *p;
@@ -1220,14 +1213,7 @@ const char *SE_LoadLanguage( const char *psLanguage, SE_BOOL bLoadDebug /* = SE_
 		SE_NewLanguage();
 
 		std::string strResults;
-		/*int iFilesFound = */SE_BuildFileList(
-												#ifdef _STRINGED
-													va("C:\\Source\\Tools\\StringEd\\test_data\\%s",sSE_STRINGS_DIR)
-												#else
-													sSE_STRINGS_DIR
-												#endif
-												, strResults
-											);
+		/*int iFilesFound = */SE_BuildFileList( sSE_STRINGS_DIR, strResults );
 
 		const char *p;
 		while ( (p=SE_GetFoundFile (strResults)) != NULL && !psErrorMessage )

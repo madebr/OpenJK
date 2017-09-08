@@ -44,13 +44,6 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include <string>
 
-#ifdef _STRINGED
-#include <stdlib.h>
-#include <memory.h>
-#include "generic.h"
-#endif
-
-
 // this just gets the binary of the file into memory, so I can parse it. Called by main SGE loader
 //
 //  returns either char * of loaded file, else NULL for failed-to-open...
@@ -63,57 +56,17 @@ unsigned char *SE_LoadFileData( const char *psFileName, int *piLoadedLength /* =
 		*piLoadedLength = 0;
 	}
 
-#ifdef _STRINGED
-	if (psFileName[1] == ':')
-	{
-		// full-path filename...
-		//
-		FILE *fh = fopen( psFileName, "rb" );
-		if (fh)
-		{
-			long lLength = filesize(fh);
+	// local filename, so prepend the base dir etc according to game and load it however (from PAK?)
+	//
+	unsigned char *pvLoadedData;
+	int iLen = FS_ReadFile( psFileName, (void **)&pvLoadedData );
 
-			if (lLength > 0)
-			{
-				psReturn = (unsigned char *) malloc( lLength + 1);
-				if (psReturn)
-				{
-					int iBytesRead = fread( psReturn, 1, lLength, fh );
-					if (iBytesRead != lLength)
-					{
-						// error reading file!!!...
-						//
-						free(psReturn);
-							 psReturn = NULL;
-					}
-					else
-					{
-						psReturn[ lLength ] = '\0';
-						if ( piLoadedLength )
-						{
-							*piLoadedLength = iBytesRead;
-						}
-					}
-					fclose(fh);
-				}
-			}
-		}
-	}
-	else
-#endif
+	if (iLen>0)
 	{
-		// local filename, so prepend the base dir etc according to game and load it however (from PAK?)
-		//
-		unsigned char *pvLoadedData;
-		int iLen = FS_ReadFile( psFileName, (void **)&pvLoadedData );
-
-		if (iLen>0)
+		psReturn = pvLoadedData;
+		if ( piLoadedLength )
 		{
-			psReturn = pvLoadedData;
-			if ( piLoadedLength )
-			{
-				*piLoadedLength = iLen;
-			}
+			*piLoadedLength = iLen;
 		}
 	}
 
@@ -125,24 +78,12 @@ unsigned char *SE_LoadFileData( const char *psFileName, int *piLoadedLength /* =
 //
 void SE_FreeFileDataAfterLoad( unsigned char *psLoadedFile )
 {
-#ifdef _STRINGED
-	if ( psLoadedFile )
-	{
-		free( psLoadedFile );
-	}
-#else
 	if ( psLoadedFile )
 	{
 		FS_FreeFile( psLoadedFile );
 	}
-#endif
 }
 
-
-
-
-
-#ifndef _STRINGED
 // quake-style method of doing things since their file-list code doesn't have a 'recursive' flag...
 //
 int giFilesFound;
@@ -199,8 +140,6 @@ static void SE_R_ListFiles( const char *psExtension, const char *psDir, std::str
 	FS_FreeFileList( sysFiles );
 	FS_FreeFileList( dirFiles );
 }
-#endif
-
 
 // replace this with a call to whatever your own code equivalent is.
 //
@@ -208,24 +147,12 @@ static void SE_R_ListFiles( const char *psExtension, const char *psDir, std::str
 //
 int SE_BuildFileList( const char *psStartDir, std::string &strResults )
 {
-#ifndef _STRINGED
 	giFilesFound = 0;
 	strResults = "";
 
 	SE_R_ListFiles( sSE_INGAME_FILE_EXTENSION, psStartDir, strResults );
 
 	return giFilesFound;
-#else
-	// .ST files...
-	//
-	int iFilesFound = BuildFileList(	va("%s\\*%s",psStartDir, sSE_INGAME_FILE_EXTENSION),	// LPCSTR psPathAndFilter,
-										true					// bool bRecurseSubDirs
-										);
-
-	extern string strResult;
-	strResults = strResult;
-	return iFilesFound;
-#endif
 }
 
 /////////////////////// eof ///////////////////////
